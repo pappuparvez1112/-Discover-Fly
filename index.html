@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+    <main class="main-content container">
+        <div class="booking-form">
+            <h3>Booking Flights</h3>
+            <div class="input-group">
+                <label for="">Flying From</label>
+                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
+            </div>
+            <div class="input-group">
+                <label for="">Flying To</label>
+                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+            </div>
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+            </div>
+            <div class="input-group f-class">
+                <div>
+                    <label >First Class $<span id="btntotal"> 150</span> </label>
+                    <input id="btncount" type="number" class="inp-style inp-width" value="0">
+                </div>
+                <div class="plus-minus-btn">
+                    <p><span onclick="handleFinalChange('btn' , true)" >+</span>
+                        <span onclick="handleFinalChange('btn' , false)" >-</span></p>
+                </div>
+            </div>
+            
+            <div class="input-group f-class">
+                <div>
+                    <label>Economy $ <span id="secondbtntotal">100</span></label>
+                    <input id="secondbtncount" class="inp-style inp-width" type="number" name="" value="0">
+                </div>
+                <div class="plus-minus-btn">
+                   <p>
+                       <span onclick="handleFinalChange('secondbtn' , true)" >+</span>
+                       <span onclick="handleFinalChange('secondbtn' , false)">-</span>
+                   </p>
+                </div>
+            </div>
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p>$ <span id="totalprice">500</span></p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p>$ <span id="taxid">50</span></p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p>$ <span id="garndtotal">550</span> </p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-style">Book Now</button>
+        </div>
+
+        <div class="booking-content">
+            <h1>discover <br> around the world</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise voluptatibus quam</p>
+        </div>
+    </section>
+
+    <script>
+
+function handleFinalChange(product,isIncrease){
+    const FinalInput=document.getElementById( product+"count");
+    
+    
+    const Finalcount=getInputValue(product);
+        let FinalNewcount=Finalcount;
+        if(isIncrease==true){
+            FinalNewcount=Finalcount+1;
+        }
+        if(isIncrease==false && Finalcount>0){
+            FinalNewcount=Finalcount-1;
+        }
+        
+        FinalInput.value=FinalNewcount;
+    
+        let FinalTotal=FinalNewcount;
+        if(product=="btn"){
+            FinalTotal=FinalNewcount*150;
+
+        }
+        if(product=="secondbtn"){
+            FinalTotal=FinalNewcount*100;
+
+        }
+        document.getElementById(product +'total').innerText=FinalTotal;
+
+        calculateTotal();
+
+  }
+  function calculateTotal(){
+           const btnCount=getInputValue('btn');
+           const SecondbtnCount=getInputValue('secondbtn');
+            
+            const totalPrice=btnCount*150+SecondbtnCount*100;
+            document.getElementById('totalprice').innerText=totalPrice;
+            const tax=Math.round(totalPrice*.10);
+            document.getElementById('taxid').innerText=tax;
+            const grandTotal=totalPrice+tax;
+            document.getElementById('garndtotal').innerText=grandTotal;
+
+         }
+         function getInputValue(product){
+            const FinalInput=document.getElementById( product+'count');
+            const Finalcount=parseInt(FinalInput.value);
+            return Finalcount;
+         }
+        
+
+
+
+
+    //   function handleFirstChange(isIncrease){
+        
+    //         const btnInput=document.getElementById('btncount');
+    //         const btncount=parseInt(btnInput.value);
+    //         let btnNewcount=btncount;
+    //         if(isIncrease==true){
+    //             btnNewcount=btncount+1;
+    //         }
+    //         if(isIncrease==false && btncount>0){
+    //             btnNewcount=btncount-1;
+    //         }
+            
+    //         btnInput.value=btnNewcount;
+    //         const btnTotal=btnNewcount*150;
+    //         document.getElementById('btntotal').innerText=btnTotal;
+
+    //   }
+//       function handleEconomyChange(isIncrease){
+        
+//         const SecondbtnInput=document.getElementById('secondtbncount');
+//         const Secondbtncount=parseInt(SecondbtnInput.value);
+//         let SecondbtnNewcount=Secondbtncount;
+//         if(isIncrease==true){
+//             SecondbtnNewcount=Secondbtncount+1;
+//         }
+//         if(isIncrease==false && Secondbtncount>0){
+//             SecondbtnNewcount=Secondbtncount-1;
+//         }
+        
+//         SecondbtnInput.value=SecondbtnNewcount;
+//         const SecondbtnTotal=SecondbtnNewcount*100;
+//         document.getElementById('secondbtntotal').innerText=SecondbtnTotal;
+
+//   }
+
+
+
+
+        // document.getElementById('increasebtn').addEventListener('click',function(){
+        //     const btnInput=document.getElementById('btncount');
+        //     const btncount=parseInt(btnInput.value);
+        //     const btnNewcount=btncount+1;
+        //     btnInput.value=btnNewcount;
+        //     btnTotal=btnNewcount*150;
+        //     document.getElementById('btntotal').innerText=btnTotal;
+
+        // })
+        // document.getElementById('decreasebtn').addEventListener('click',function(){
+        //     const btnInput=document.getElementById('btncount');
+        //     const btncount=parseInt(btnInput.value);
+        //     const btnNewcount=btncount-1;
+        //     btnInput.value=btnNewcount;
+        //     btnTotal=btnNewcount*150;
+        //     document.getElementById('btntotal').innerText=btnTotal;
+
+        // })
+    </script>
+
+    <!--Thank You-->
+</body>
+
+</html>
